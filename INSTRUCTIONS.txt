@@ -1,0 +1,16 @@
+Use the Symfony framework to build an API endpont that accepts a Team ID, and returns a JSON with the info of its youngest player:
+{
+	"name": "PAULINHO", (name in uppercase)
+        "position": "Central Midfield",
+        "jerseyNumber": 15,
+        "dateOfBirth": "1988-07-25",
+        "nationality": "Brazil",
+        "contractUntil": "2021-06-30"
+}
+
+Name must be returned in uppercase.
+You should get the info from the following API: http://api.football-data.org/v1 (doc in https://www.football-data.org/documentation).
+
+*Bonus: design the code in a way that the source of data could be interchangable (today is an external API, but tomorrow it could be a cache, a database, or the filesystem).
+
+*Bonus2: limit the query only to a competition called "Primera Division 2018", a query to any team that doesn't belong to this competition should return a 404.
