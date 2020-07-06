@@ -4,6 +4,7 @@ namespace App\Application\Team;
 
 use App\Domain\Player\PlayerTransformer;
 use App\Domain\Team\HasNoPlayersException;
+use App\Domain\Team\NonExistingTeam;
 use App\Domain\Team\NotValidCompetitionException;
 use App\Domain\Team\TeamRepository;
 
@@ -19,6 +20,13 @@ class GetTeamYoungestPlayerUseCase
         $this->transformer = $transformer;
     }
 
+    /**
+     * @param int $teamID
+     * @return array
+     * @throws HasNoPlayersException
+     * @throws NotValidCompetitionException
+     * @throws NonExistingTeam
+     */
     public function execute(int $teamID)
     {
         $team = $this->teams->findById($teamID);

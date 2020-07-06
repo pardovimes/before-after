@@ -3,6 +3,7 @@
 namespace App\Infrastructure\Team\Persistence\InMemory;
 
 use App\Domain\Player\Player;
+use App\Domain\Team\NonExistingTeam;
 use App\Domain\Team\Team;
 use App\Domain\Team\TeamRepository;
 
@@ -43,9 +44,18 @@ class FakeTeamRepository implements TeamRepository
         ],
     ];
 
+    /**
+     * @param int $id
+     * @return Team
+     * @throws NonExistingTeam
+     */
     public function findById(int $id): Team
     {
-        $rawInfo = self::TEAMS[$id];
+        try {
+            $rawInfo = self::TEAMS[$id];
+        } catch (\Exception $e) {
+            throw new NonExistingTeam('This team doesn\'t exists');
+        }
         $team = new Team($id, $rawInfo['name'], $rawInfo['competition']);
         foreach ($rawInfo['players'] as $playerRawInfo) {
             $player = new Player(
